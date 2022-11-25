@@ -11,7 +11,7 @@ export default function Home() {
         <div className={styles.grid}>
           <p className={styles.card}>Next.js 13</p>
 
-          <p className={styles.card}>Next.js 13</p>
+          <p className={styles.card}>TailwindCSS</p>
 
           <p className={styles.card}>Next.js 13</p>
         </div>
