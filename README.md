@@ -3,6 +3,7 @@
 ## Contains
 
 - Next.js 13
+- TailwindCSS
 
 ## Deploy on Vercel
 
