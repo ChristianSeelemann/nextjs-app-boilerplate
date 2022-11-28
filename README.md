@@ -4,6 +4,8 @@
 
 - Next.js 13
 - TailwindCSS
+- Next-Auth
+- Next-API
 
 ## Deploy on Vercel
 
