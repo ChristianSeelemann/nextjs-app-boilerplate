@@ -1,6 +1,12 @@
 import styles from "./page.module.css";
+import Login from "./components/authentification/login";
+import getUser from "./components/authentification/getUser";
 
-export default function Home() {
+getUser();
+
+export default async function Home() {
+  const user = await getUser();
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -13,8 +19,11 @@ export default function Home() {
 
           <p className={styles.card}>TailwindCSS</p>
 
-          <p className={styles.card}>Next.js 13</p>
+          <p className={styles.card}>Next-Auth</p>
+
+          <p className={styles.card}>Next-API</p>
         </div>
+        <Login user={user} />
       </main>
     </div>
   );
