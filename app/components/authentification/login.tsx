@@ -28,7 +28,7 @@ export default function Login({ user }: any) {
       ) : (
         "Logged in as " + userData.name
       )}
-      {userData.banned && <p>You are banned from this website.</p>}
+      {userData && userData.banned && <p>You are banned from this website.</p>}
       {user && <button onClick={() => signOut()}>Logout</button>}
     </>
   );

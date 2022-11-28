@@ -6,7 +6,11 @@ export default async function getUser() {
 
   if (token) {
     const getUser = await fetch(
-      process.env.BASE_URL + "/api/user/get?token=" + token.value,
+      process.env.BASE_URL +
+        "/api/user/get?token=" +
+        token.value +
+        "&api_key=" +
+        process.env.API_KEY,
       {
         method: "GET",
         headers: {

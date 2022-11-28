@@ -25,17 +25,21 @@ export default async function getUser(
     sessionToken: req.query.token,
   });
 
-  if (session) {
-    const user = await User.findById(session.userId);
+  if (req.query.api_key == process.env.API_KEY) {
+    if (session) {
+      const user = await User.findById(session.userId);
 
-    const today = new Date();
-    await Session.findOneAndUpdate(
-      { sessionToken: req.query.token },
-      { expires: today.setDate(today.getDate() + 30) }
-    );
-    res.status(200).json({ user: user, token: req.query.token });
+      const today = new Date();
+      await Session.findOneAndUpdate(
+        { sessionToken: req.query.token },
+        { expires: today.setDate(today.getDate() + 30) }
+      );
+      res.status(200).json({ user: user, token: req.query.token });
+    } else {
+      const user = null;
+      res.status(401).json(user);
+    }
   } else {
-    const user = null;
-    res.status(401).json(user);
+    res.status(401).json(null);
   }
 }
