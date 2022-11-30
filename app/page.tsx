@@ -28,16 +28,16 @@ export default async function Home() {
         <Login user={user} />
         {colorMode ? (
           colorMode === "dark" ? (
-            <div className="bg-red-500 dark:bg-purple-500">
-              Dark Mode enabled.
+            <div className="bg-red-500 dark:bg-purple-500 rounded-md p-2">
+              Dark Mode enabled
             </div>
           ) : (
-            <div className="bg-red-500 dark:bg-purple-500">
-              Light Mode enabled.
+            <div className="bg-red-500 dark:bg-purple-500 rounded-md p-2">
+              Light Mode enabled
             </div>
           )
         ) : (
-          <div className="bg-red-500 dark:bg-purple-500">No Colormode set.</div>
+          <div className="bg-purple-400 rounded-md p-2">No Colormode set</div>
         )}
       </main>
     </div>
