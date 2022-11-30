@@ -1,5 +1,6 @@
 import "./globals.css";
-import Link from "next/link";
+import Header from "./components/parts/Header";
+import Footer from "./components/parts/Footer";
 
 export default async function RootLayout({
   children,
@@ -10,18 +11,10 @@ export default async function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <header>
-          <nav>
-            <Link href="/">
-              <li>Home</li>
-            </Link>
-            <Link href="/sandbox">
-              <li>Sandbox</li>
-            </Link>
-          </nav>
-        </header>
+        {/* @ts-expect-error Server Component */}
+        <Header />
         {children}
-        <footer>Footer</footer>
+        <Footer />
       </body>
     </html>
   );
