@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import connectMongo from "../../../app/lib/dbConnectionAPI";
 import User from "../../../app/models/userModel";
-import Session from "../../../app/models/sessionModel";
 import apiWrapper from "../../../app/lib/apiWrapper";
 
 type Data = {
