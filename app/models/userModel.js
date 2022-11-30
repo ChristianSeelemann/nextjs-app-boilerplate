@@ -7,6 +7,8 @@ const userSchema = new Schema({
   emailVerified: null || Boolean,
   banned: null || Boolean,
   role: null || [String],
+  nickname: String || null,
+  colormode: String || null,
 });
 
 const User = models.User || model("User", userSchema);
