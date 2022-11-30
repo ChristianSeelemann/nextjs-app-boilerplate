@@ -5,7 +5,8 @@
 - Next.js 13
 - TailwindCSS
 - Next-Auth with Custom Server Component Solution
-- Next-API
+- Next-API with Custom API-Key Safety Solution
+- Custom Dark Mode Solution
 
 ## Deploy on Vercel
 
