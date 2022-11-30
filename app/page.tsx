@@ -24,6 +24,19 @@ export default async function Home() {
           <p className={styles.card}>Next-API</p>
         </div>
         <Login user={user} />
+        {user?.colormode ? (
+          user.colormode === "dark" ? (
+            <div className="bg-red-500 dark:bg-purple-500">
+              Dark Mode enabled.
+            </div>
+          ) : (
+            <div className="bg-red-500 dark:bg-purple-500">
+              Light Mode enabled.
+            </div>
+          )
+        ) : (
+          <div className="bg-red-500 dark:bg-purple-500">No Colormode set.</div>
+        )}
       </main>
     </div>
   );

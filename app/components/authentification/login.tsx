@@ -2,8 +2,9 @@
 
 import { signIn, signOut } from "next-auth/react";
 import { setCookie } from "cookies-next";
+import { User } from "../../../types/user";
 
-export default function Login({ user }: any) {
+export default function Login({ user }: { user: User }) {
   let data;
   let userData;
 
@@ -14,11 +15,11 @@ export default function Login({ user }: any) {
     // If user is logged in, renew the session, and set data.
   } else {
     data = user;
+    userData = data.user;
     setCookie("next-auth.session-token", data.token, {
       path: "/",
       maxAge: 30 * 24 * 60 * 60,
     });
-    userData = data.user;
   }
 
   return (

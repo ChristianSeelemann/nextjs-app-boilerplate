@@ -2,6 +2,7 @@ import Link from "next/link";
 import Login from "../authentification/login";
 
 import getUser from "../authentification/getUser";
+import ColorModeToggle from "../colormode/colorModeToggle";
 
 getUser();
 
@@ -18,7 +19,8 @@ export default async function Header() {
           <li>Sandbox</li>
         </Link>
       </nav>
-      <div>
+      <div className="flex">
+        <ColorModeToggle user={user} />
         <Login user={user} />
       </div>
     </header>

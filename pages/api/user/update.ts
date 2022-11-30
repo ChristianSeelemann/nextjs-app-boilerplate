@@ -25,13 +25,9 @@ export default async function getUser(
   await connectMongo();
 
   apiWrapper(req, res, async (session: any) => {
-    const user = await User.findById(session.userId);
-
-    const today = new Date();
-    await Session.findOneAndUpdate(
-      { sessionToken: req.query.token },
-      { expires: today.setDate(today.getDate() + 30) }
-    );
-    res.status(200).json({ user: user, token: req.query.token });
+    await User.findByIdAndUpdate(session.userId, {
+      colormode: req.body.colormode,
+    });
+    res.status(200).json({ user: req.body, token: req.query.token });
   });
 }
