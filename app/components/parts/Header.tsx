@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Login from "../authentification/login";
 
-import getUser from "../authentification/getUser";
+import getUser from "../../lib/getUser";
 import ColorModeToggle from "../colormode/colorModeToggle";
 
 getUser();

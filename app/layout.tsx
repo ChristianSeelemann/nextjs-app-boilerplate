@@ -1,7 +1,7 @@
 import "./globals.css";
 import Header from "./components/parts/Header";
 import Footer from "./components/parts/Footer";
-import getUser from "./components/authentification/getUser";
+import getUser from "./lib/getUser";
 import getColorMode from "./lib/getColorMode";
 
 getUser();

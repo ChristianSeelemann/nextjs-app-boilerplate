@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import Login from "./components/authentification/login";
-import getUser from "./components/authentification/getUser";
+import getUser from "./lib/getUser";
 
 getUser();
 
