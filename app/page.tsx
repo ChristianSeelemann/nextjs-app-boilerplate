@@ -1,11 +1,13 @@
 import styles from "./page.module.css";
 import Login from "./components/authentification/login";
 import getUser from "./lib/getUser";
+import getColorMode from "./lib/getColorMode";
 
 getUser();
 
 export default async function Home() {
   const user = await getUser();
+  const colorMode = getColorMode({ user });
 
   return (
     <div className={styles.container}>
@@ -24,8 +26,8 @@ export default async function Home() {
           <p className={styles.card}>Next-API</p>
         </div>
         <Login user={user} />
-        {user?.colormode ? (
-          user.colormode === "dark" ? (
+        {colorMode ? (
+          colorMode === "dark" ? (
             <div className="bg-red-500 dark:bg-purple-500">
               Dark Mode enabled.
             </div>
