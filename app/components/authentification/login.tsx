@@ -2,7 +2,7 @@
 
 import { signIn, signOut } from "next-auth/react";
 import { setCookie } from "cookies-next";
-import { User } from "../../../types/user";
+import { User } from "../../../types/auth";
 
 export default function Login({ user }: { user: User }) {
   let data;
