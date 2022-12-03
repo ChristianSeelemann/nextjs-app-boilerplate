@@ -4,8 +4,14 @@ const userSchema = new Schema({
   name: String,
   email: String,
   image: String,
-  emailVerified: null || Boolean,
-  banned: null || Boolean,
+  emailVerified: {
+    type: null || Boolean,
+    default: false,
+  },
+  banned: {
+    type: null || Boolean,
+    default: false,
+  },
   role: null || [String],
   nickname: String || null,
   colormode: String || null,
