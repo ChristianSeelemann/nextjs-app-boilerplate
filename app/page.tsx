@@ -3,11 +3,9 @@ import Login from "./components/authentification/login";
 import getUser from "./lib/getUser";
 import getColorMode from "./lib/getColorMode";
 
-getUser();
-
 export default async function Home() {
   const user = await getUser();
-  const colorMode = getColorMode({ user });
+  const colorMode = getColorMode(user);
 
   return (
     <div className={styles.container}>

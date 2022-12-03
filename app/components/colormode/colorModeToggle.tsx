@@ -3,7 +3,7 @@
 import { getCookie, setCookie } from "cookies-next";
 import { MdDarkMode } from "react-icons/md";
 import { HiSun } from "react-icons/hi";
-import { Session, User } from "../../../types/auth";
+import { Session } from "../../../types/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
