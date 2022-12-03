@@ -3,41 +3,45 @@
 import { getCookie, setCookie } from "cookies-next";
 import { MdDarkMode } from "react-icons/md";
 import { HiSun } from "react-icons/hi";
-import { User } from "../../../types/user";
+import { Session, User } from "../../../types/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-function getColorMode({ user }: { user: User }) {
+function getColorMode({ user }: { user: Session }) {
   const colorModeCookie = getCookie("next-colormode");
   const defaultColorMode = process.env.NEXT_PUBLIC_DEFAULT_COLORMODE;
 
   let actualColorMode;
+
   // Check if user is logged in
-  if (!user) {
-    // No? Check if cookie is set
-    if (!colorModeCookie) {
-      actualColorMode = defaultColorMode;
+  if (user) {
+    // Check if user has a color mode set
+    if (user.user?.colormode) {
+      actualColorMode = user.user.colormode;
+      // If not, check if there is a cookie
     } else {
-      actualColorMode = colorModeCookie;
+      // If there is a cookie, use it
+      if (colorModeCookie) {
+        actualColorMode = colorModeCookie;
+        // If not, use the default color mode
+      } else {
+        actualColorMode = defaultColorMode;
+      }
     }
   } else {
-    // Yes? Check if user has a color mode set
-    if (!user.user.colormode) {
-      // No? Check if cookie is set
-      if (!colorModeCookie) {
-        actualColorMode = defaultColorMode;
-      } else {
-        actualColorMode = colorModeCookie;
-      }
-      // Yes? Set actualColorMode to user's color mode
+    // If user is not logged in, check cookie
+    if (colorModeCookie) {
+      actualColorMode = colorModeCookie;
+      // If cookie is not set, set default color mode
     } else {
-      actualColorMode = user.user.colormode;
+      actualColorMode = defaultColorMode;
     }
   }
+  // Return the actual color mode
   return actualColorMode;
 }
 
-async function toggleColorMode({ user }: { user: User }) {
+async function toggleColorMode({ user }: { user: Session }) {
   const actualColor = getColorMode({ user });
 
   // Everytime set cookie
@@ -46,7 +50,7 @@ async function toggleColorMode({ user }: { user: User }) {
   if (user) {
     await fetch(
       process.env.NEXT_PUBLIC_BASE_URL +
-        "/api/user/update?token=" +
+        "/api/user/updateSelf?token=" +
         user.token +
         "&api_key=" +
         process.env.NEXT_PUBLIC_API_KEY,
@@ -63,7 +67,7 @@ async function toggleColorMode({ user }: { user: User }) {
   }
 }
 
-export default function ColorModeToggle({ user }: { user: User }) {
+export default function ColorModeToggle({ user }: { user: Session }) {
   const router = useRouter();
   const [colorMode, setColorMode] = useState<any>();
 

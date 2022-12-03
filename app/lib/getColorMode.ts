@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
-import { User } from "../../types/user";
+import { Session } from "../../types/auth";
 
-export default function getColorMode({ user }: { user: User }) {
+export default function getColorMode({ user }: { user: Session }) {
   const allCookies = cookies();
   const colormodeCookie = allCookies.get("next-colormode");
 
@@ -10,8 +10,9 @@ export default function getColorMode({ user }: { user: User }) {
   let colorMode;
 
   if (!userData || !userData.colormode) {
-    // If the user is not logged in, use the colormode from the cookie
+    // If the user is not logged in or don´t had a colormode, use the colormode from the cookie
     if (!colormodeCookie) {
+      // If the cookie is not set, use the default color mode
       colorMode = process.env.NEXT_PUBLIC_DEFAULT_COLORMODE;
     } else {
       colorMode = colormodeCookie.value;
