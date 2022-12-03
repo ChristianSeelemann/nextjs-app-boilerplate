@@ -1,26 +1,67 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import Session from "../../app/models/sessionModel";
+import User from "../../app/models/userModel";
+import { User as UserType } from "../../types/auth";
 
-export default async function apiWrapper(req: any, res: any, callback: any) {
-  // Check if token is present
-  if (req.query.token) {
-    const session = await Session.findOne({
-      sessionToken: req.query.token,
-    });
-    // Check if API Key is valid
-    if (req.query.api_key == process.env.API_KEY) {
+export default async function apiWrapper(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  callback: (session: UserType) => void,
+  isLoggedIn?: boolean,
+  role?: string
+) {
+  // Check the API Key
+  if (req.query.api_key === process.env.API_KEY) {
+    // Check if token is present
+    if (req.query.token) {
+      // Get session informations
+      const session = await Session.findOne({
+        sessionToken: req.query.token,
+      });
       // Check if session is valid
       if (session) {
-        callback(session);
-        // Session is invalid
+        // When session is valid get user informations
+        const user = await User.findById(session.userId);
+        // Check if user is valid
+        if (user) {
+          // Set new expiration date for session
+          const today = new Date();
+          await Session.findOneAndUpdate(
+            { sessionToken: session.sessionToken },
+            { expires: today.setDate(today.getDate() + 30) }
+          );
+          // Check if a specific role is required
+          if (role) {
+            // Check if user has the required role
+            if (user.role.includes(role)) {
+              callback(user);
+              // When user doesn't have the required role return auth error
+            } else {
+              res.status(401).json(null);
+            }
+            // When not, call the callback function
+          } else {
+            callback(user);
+          }
+          // When user is not valid return auth error
+        } else {
+          // When a logged user is needed return auth error
+          if (isLoggedIn) {
+            res.status(401).json(null);
+            // When a logged user is not needed call the callback function without user data
+          } else {
+            callback(null);
+          }
+        }
+        // When session is invalid return auth error
       } else {
-        const user = null;
-        res.status(401).json(user);
+        res.status(401).json(null);
       }
-      // API Key is invalid
+      // When token is missing return auth error
     } else {
       res.status(401).json(null);
     }
-    //Missing token
+    // When API Key is wrong or missing return auth error
   } else {
     res.status(401).json(null);
   }
