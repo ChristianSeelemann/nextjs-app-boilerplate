@@ -9,7 +9,12 @@ export default async function getUser(
 ) {
   await connectMongo();
 
-  apiWrapper(req, res, async (user: User) => {
-    res.status(200).json({ user: user, token: req.query.token });
-  });
+  apiWrapper(
+    req,
+    res,
+    async (user: User) => {
+      res.status(200).json({ user: user, token: req.query.token });
+    },
+    true
+  );
 }
