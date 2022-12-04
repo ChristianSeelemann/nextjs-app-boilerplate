@@ -12,54 +12,54 @@ export default async function apiWrapper(
 ) {
   // Check the API Key
   if (req.query.api_key === process.env.API_KEY) {
-    // Check if token is present
-    if (req.query.token) {
-      // Get session informations
-      const session = await Session.findOne({
-        sessionToken: req.query.token,
-      });
-      // Check if session is valid
-      if (session) {
-        // When session is valid get user informations
-        const user = await User.findById(session.userId);
-        // Check if user is valid
-        if (user) {
-          // Set new expiration date for session
-          const today = new Date();
-          await Session.findOneAndUpdate(
-            { sessionToken: session.sessionToken },
-            { expires: today.setDate(today.getDate() + 30) }
-          );
-          // Check if a specific role is required
-          if (role) {
-            // Check if user has the required role
-            if (user.role.includes(role)) {
-              callback(user);
-              // When user doesn't have the required role return auth error
+    // Check if logged user is needed
+    if (isLoggedIn) {
+      // Check if token is present
+      if (req.query.token) {
+        // Get session informations
+        const session = await Session.findOne({
+          sessionToken: req.query.token,
+        });
+        // Check if session is valid
+        if (session) {
+          // When session is valid get user informations
+          const user = await User.findById(session.userId);
+          // Check if user is valid
+          if (user) {
+            // Set new expiration date for session
+            const today = new Date();
+            await Session.findOneAndUpdate(
+              { sessionToken: session.sessionToken },
+              { expires: today.setDate(today.getDate() + 30) }
+            );
+            // Check if a specific role is required
+            if (role) {
+              // Check if user has the required role
+              if (user.role.includes(role)) {
+                callback(user);
+                // When user doesn't have the required role return auth error
+              } else {
+                res.status(401).json(null);
+              }
+              // When not, call the callback function
             } else {
-              res.status(401).json(null);
+              callback(user);
             }
-            // When not, call the callback function
+            // When user is not valid return auth error
           } else {
-            callback(user);
-          }
-          // When user is not valid return auth error
-        } else {
-          // When a logged user is needed return auth error
-          if (isLoggedIn) {
             res.status(401).json(null);
-            // When a logged user is not needed call the callback function without user data
-          } else {
-            callback(null);
           }
+          // When session is invalid return auth error
+        } else {
+          res.status(401).json(null);
         }
-        // When session is invalid return auth error
+        // When token is missing return auth error
       } else {
         res.status(401).json(null);
       }
-      // When token is missing return auth error
+      // When no logged user is needed, skip the session check
     } else {
-      res.status(401).json(null);
+      callback(null);
     }
     // When API Key is wrong or missing return auth error
   } else {
