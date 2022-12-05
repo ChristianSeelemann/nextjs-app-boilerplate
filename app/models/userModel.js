@@ -15,6 +15,13 @@ const userSchema = new Schema({
   role: null || [String],
   nickname: String || null,
   colormode: String || null,
+  lastOnline: Date || null,
+  privacy: {
+    showLastOnline: {
+      type: null || Boolean,
+      default: true,
+    },
+  },
 });
 
 const User = models.User || model("User", userSchema);
