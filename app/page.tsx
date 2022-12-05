@@ -1,5 +1,4 @@
 import styles from "./page.module.css";
-import Login from "./components/authentification/login";
 import getUser from "./lib/getUser";
 import getColorMode from "./lib/getColorMode";
 
@@ -23,7 +22,6 @@ export default async function Home() {
 
           <p className={styles.card}>Next-API</p>
         </div>
-        <Login user={user} />
         {colorMode ? (
           colorMode === "dark" ? (
             <div className="bg-red-500 dark:bg-purple-500 rounded-md p-2">

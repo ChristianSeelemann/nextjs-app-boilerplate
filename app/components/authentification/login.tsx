@@ -1,22 +1,16 @@
 "use client";
 
-import { signIn, signOut } from "next-auth/react";
 import { setCookie } from "cookies-next";
-import { User } from "../../../types/auth";
+import { Session } from "../../../types/auth";
+import { signIn, signOut } from "next-auth/react";
+import { Button } from "@mui/material";
+import { FiLogOut } from "react-icons/fi";
+import { BsDiscord } from "react-icons/bs";
+import Avatar from "../user/avatar";
 
-export default function Login({ user }: { user: User }) {
-  let data;
-  let userData;
-
-  // If user is not logged in, set data to null.
-  if (!user) {
-    data = null;
-    userData = null;
-    // If user is logged in, renew the session, and set data.
-  } else {
-    data = user;
-    userData = data.user;
-    setCookie("next-auth.session-token", data.token, {
+export default function Login({ session }: { session: Session }) {
+  if (session) {
+    setCookie("next-auth.session-token", session.token, {
       path: "/",
       maxAge: 30 * 24 * 60 * 60,
     });
@@ -24,13 +18,47 @@ export default function Login({ user }: { user: User }) {
 
   return (
     <>
-      {!userData ? (
-        <button onClick={() => signIn("discord")}>Login with Discord</button>
+      {session ? (
+        <div className="flex gap-3">
+          <Button
+            variant="outlined"
+            startIcon={<FiLogOut />}
+            onClick={() => signOut()}
+            sx={{
+              color: "white",
+              paddingTop: "7px",
+              borderColor: "white",
+              "& .MuiButton-startIcon": {
+                marginTop: "-3px",
+              },
+            }}
+          >
+            Logout
+          </Button>
+
+          <Avatar session={session} />
+        </div>
       ) : (
-        "Logged in as " + userData.name
+        <div className="flex gap-3">
+          <Button
+            variant="outlined"
+            aria-label="Login"
+            color="primary"
+            startIcon={<BsDiscord />}
+            onClick={() => signIn("discord")}
+            sx={{
+              color: "white",
+              paddingTop: "7px",
+              borderColor: "white",
+              "& .MuiButton-startIcon": {
+                marginTop: "-3px",
+              },
+            }}
+          >
+            Login with Discord
+          </Button>
+        </div>
       )}
-      {userData && userData.banned && <p>You are banned from this website.</p>}
-      {user && <button onClick={() => signOut()}>Logout</button>}
     </>
   );
 }
