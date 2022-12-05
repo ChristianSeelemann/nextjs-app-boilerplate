@@ -6,18 +6,19 @@ import { HiSun } from "react-icons/hi";
 import { Session } from "../../../types/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { IconButton } from "@mui/material";
 
-function getColorMode({ user }: { user: Session }) {
+function getColorMode({ session }: { session: Session }) {
   const colorModeCookie = getCookie("next-colormode");
   const defaultColorMode = process.env.NEXT_PUBLIC_DEFAULT_COLORMODE;
 
   let actualColorMode;
 
   // Check if user is logged in
-  if (user) {
+  if (session) {
     // Check if user has a color mode set
-    if (user.user?.colormode) {
-      actualColorMode = user.user.colormode;
+    if (session.user?.colormode) {
+      actualColorMode = session.user.colormode;
       // If not, check if there is a cookie
     } else {
       // If there is a cookie, use it
@@ -41,17 +42,17 @@ function getColorMode({ user }: { user: Session }) {
   return actualColorMode;
 }
 
-async function toggleColorMode({ user }: { user: Session }) {
-  const actualColor = getColorMode({ user });
+async function toggleColorMode({ session }: { session: Session }) {
+  const actualColor = getColorMode({ session });
 
   // Everytime set cookie
   setCookie("next-colormode", actualColor === "light" ? "dark" : "light");
   // If user is logged in, set user's color mode
-  if (user) {
+  if (session) {
     await fetch(
       process.env.NEXT_PUBLIC_BASE_URL +
         "/api/user/updateSelf?token=" +
-        user.token +
+        session.token +
         "&api_key=" +
         process.env.NEXT_PUBLIC_API_KEY,
       {
@@ -67,27 +68,37 @@ async function toggleColorMode({ user }: { user: Session }) {
   }
 }
 
-export default function ColorModeToggle({ user }: { user: Session }) {
+export default function ColorModeToggle({ session }: { session: Session }) {
   const router = useRouter();
   const [colorMode, setColorMode] = useState<any>();
 
   // Set color mode on load to avoid hydration mismatch
   useEffect(() => {
-    setColorMode(getColorMode({ user }));
+    setColorMode(getColorMode({ session }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          toggleColorMode({ user });
-          setColorMode(colorMode === "dark" ? "light" : "dark");
-          router.refresh();
-        }}
-      >
-        {colorMode ? colorMode === "dark" ? <HiSun /> : <MdDarkMode /> : null}
-      </button>
-    </div>
+    <>
+      {colorMode && (
+        <IconButton
+          aria-label="Change Colormode"
+          color="inherit"
+          onClick={() => {
+            toggleColorMode({ session });
+            setColorMode(colorMode === "dark" ? "light" : "dark");
+            setTimeout(() => {
+              router.refresh();
+            }, 250);
+          }}
+        >
+          {colorMode === "dark" ? (
+            <HiSun className="text-yellow-500" />
+          ) : (
+            <MdDarkMode className="text-blue-200" />
+          )}
+        </IconButton>
+      )}
+    </>
   );
 }
