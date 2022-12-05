@@ -7,21 +7,23 @@ import ColorModeToggle from "../colormode/colorModeToggle";
 getUser();
 
 export default async function Header() {
-  const user = await getUser();
+  const userData = await getUser();
 
   return (
-    <header className="flex justify-between">
+    <header className="flex justify-between items-center px-8 py-3 bg-blue-300/10">
       <nav>
-        <Link href="/">
-          <li>Home</li>
-        </Link>
-        <Link href="/sandbox">
-          <li>Sandbox</li>
-        </Link>
+        <ul className="flex gap-4">
+          <Link href="/">
+            <li>Home</li>
+          </Link>
+          <Link href="/sandbox">
+            <li>Sandbox</li>
+          </Link>
+        </ul>
       </nav>
-      <div className="flex">
-        <ColorModeToggle user={user} />
-        <Login user={user} />
+      <div className="flex gap-4">
+        <ColorModeToggle session={userData} />
+        <Login session={userData} />
       </div>
     </header>
   );
