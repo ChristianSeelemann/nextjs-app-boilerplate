@@ -7,6 +7,10 @@ export type User = {
   banned?: boolean | null;
   nickname?: string | null;
   colormode: string | null;
+  lastOnline: any;
+  privacy: {
+    showLastOnline: boolean | null;
+  };
 } | null;
 
 export type Session = {
