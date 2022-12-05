@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/material": "^5.10.16",
     "@next-auth/mongodb-adapter": "^1.1.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
