@@ -19,6 +19,28 @@ a {
   box-sizing: border-box;
 }
 
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8f54a0 #ffffff00;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff00;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #1f6cfc;
+  border-radius: 12px;
+  border: 10px solid #ffffff00;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
