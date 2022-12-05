@@ -27,11 +27,18 @@ export default async function apiWrapper(
           // Check if user is valid
           if (user) {
             // Set new expiration date for session
-            const today = new Date();
-            await Session.findOneAndUpdate(
-              { sessionToken: session.sessionToken },
-              { expires: today.setDate(today.getDate() + 30) }
+            const expirationDate =
+              Math.floor(new Date().getTime() / 1000) + 2629743;
+            const sessionDate = Math.floor(
+              new Date(session.expires).getTime() / 1000
             );
+            // Only Update Session once a day
+            if (expirationDate - sessionDate > 86400) {
+              await Session.findOneAndUpdate(
+                { sessionToken: session.sessionToken },
+                { expires: new Date().setDate(new Date().getDate() + 30) }
+              );
+            }
             // Check if a specific role is required
             if (role) {
               // Check if user has the required role
