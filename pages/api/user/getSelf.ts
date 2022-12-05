@@ -13,6 +13,7 @@ export default async function getUser(
     req,
     res,
     async (user: User) => {
+      // Just return the user data
       res.status(200).json({ user: user, token: req.query.token });
     },
     true
