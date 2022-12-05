@@ -4,8 +4,9 @@
 
 - Next.js 13
 - TailwindCSS
+- MongoDB
 - Next-Auth with Custom Server Component Solution
-- Next-API with Custom API-Key Safety Solution
+- Next-API with Custom API-Key Safety Solution and mongoose
 - Custom Dark Mode Solution
 - Basic Custom User System
 
