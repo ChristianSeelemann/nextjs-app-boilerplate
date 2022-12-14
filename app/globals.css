@@ -2,51 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #8f54a0 #ffffff00;
+  scrollbar-color: #abc8ff2a transparent;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 4px;
+  width: 0.4rem;
 }
 
 *::-webkit-scrollbar-track {
-  background: #ffffff00;
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #1f6cfc;
+  background-color: #abc8ff2a;
   border-radius: 12px;
-  border: 10px solid #ffffff00;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.wrapper {
+  height: calc(100vh - 4.5rem);
 }
