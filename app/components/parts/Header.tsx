@@ -11,7 +11,7 @@ export default async function Header() {
 
   return (
     <header className="flex justify-between items-center px-8 bg-light-100 dark:bg-dark-900 text-light-100 h-16 fixed top-0 left-0 w-screen">
-      <nav>
+      <nav className="font-bodysemibold">
         <ul className="flex gap-4">
           <Link href="/">
             <li>Home</li>
