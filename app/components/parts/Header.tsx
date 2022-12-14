@@ -10,7 +10,7 @@ export default async function Header() {
   const userData = await getUser();
 
   return (
-    <header className="flex justify-between items-center px-8 py-3 bg-blue-300/10">
+    <header className="flex justify-between items-center px-8 bg-light-100 dark:bg-dark-900 text-light-100 h-16 fixed top-0 left-0 w-screen">
       <nav>
         <ul className="flex gap-4">
           <Link href="/">
