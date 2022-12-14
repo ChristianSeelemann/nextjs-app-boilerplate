@@ -25,10 +25,10 @@ export default function Button({
       startIcon={startIcon}
       onClick={onClick}
       aria-label={ariaLabel}
+      className={classes}
       sx={{
         fontFamily: "Chakra Petch Bold",
       }}
-      className={classes}
     >
       {text}
     </MUIButton>
