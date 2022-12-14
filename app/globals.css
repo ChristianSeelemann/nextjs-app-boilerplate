@@ -2,6 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Bai Jamjuree";
+  src: local("Bai Jamjuree"),
+    url("../fonts/BaiJamjuree-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bai Jamjuree Italic";
+  src: local("Bai Jamjuree Italic"),
+    url("../fonts/BaiJamjuree-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bai Jamjuree Light";
+  src: local("Bai Jamjuree Light"),
+    url("../fonts/BaiJamjuree-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bai Jamjuree Light Italic";
+  src: local("Bai Jamjuree Light Italic"),
+    url("../fonts/BaiJamjuree-LightItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bai Jamjuree Sembibold";
+  src: local("Bai Jamjuree Sembibold"),
+    url("../fonts/BaiJamjuree-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bai Jamjuree Sembibold Italic";
+  src: local("Bai Jamjuree Sembibold Italic"),
+    url("../fonts/BaiJamjuree-SemiBoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch";
+  src: local("Chakra Petch"),
+    url("../fonts/ChakraPetch-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch Italic";
+  src: local("Chakra Petch Italic"),
+    url("../fonts/ChakraPetch-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch Bold";
+  src: local("Chakra Petch"),
+    url("../fonts/ChakraPetch-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch Bold Italic";
+  src: local("Chakra Petch Italic"),
+    url("../fonts/ChakraPetch-BoldItalic.ttf") format("truetype");
+}
+
+@layer base {
+  html {
+    font-family: "Bai Jamjuree", sans-serif;
+  }
+}
+
+@layer components {
+  .defaultbutton {
+    @apply dark:border-primary-50 dark:bg-transparent dark:text-primary-50 dark:hover:border-primary-500 dark:hover:text-primary-500 border-primary-500 text-primary-50 hover:border-primary-500 hover:text-primary-500 bg-primary-500;
+  }
+}
+
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
