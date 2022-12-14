@@ -9,6 +9,7 @@
 - Next-API with Custom API-Key Safety Solution and mongoose
 - Custom Dark Mode Solution
 - Basic Custom User System
+- MaterialUI
 
 ## Deploy on Vercel
 
