@@ -6,7 +6,7 @@ import { signIn, signOut } from "next-auth/react";
 import { Button } from "@mui/material";
 import { FiLogOut } from "react-icons/fi";
 import { BsDiscord } from "react-icons/bs";
-import Avatar from "../user/avatar";
+import InteractiveAvatar from "../user/avatarWithMenu";
 
 export default function Login({ session }: { session: Session }) {
   if (session) {
@@ -36,7 +36,7 @@ export default function Login({ session }: { session: Session }) {
             Logout
           </Button>
 
-          <Avatar session={session} />
+          <InteractiveAvatar session={session} />
         </div>
       ) : (
         <div className="flex gap-3">
