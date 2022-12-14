@@ -3,10 +3,10 @@
 import { setCookie } from "cookies-next";
 import { Session } from "../../../types/auth";
 import { signIn, signOut } from "next-auth/react";
-import { Button } from "@mui/material";
 import { FiLogOut } from "react-icons/fi";
 import { BsDiscord } from "react-icons/bs";
 import InteractiveAvatar from "../user/avatarWithMenu";
+import Button from "../ui/button";
 
 export default function Login({ session }: { session: Session }) {
   if (session) {
@@ -24,17 +24,10 @@ export default function Login({ session }: { session: Session }) {
             variant="outlined"
             startIcon={<FiLogOut />}
             onClick={() => signOut()}
-            sx={{
-              color: "white",
-              paddingTop: "7px",
-              borderColor: "white",
-              "& .MuiButton-startIcon": {
-                marginTop: "-3px",
-              },
-            }}
-          >
-            Logout
-          </Button>
+            ariaLabel="Logout Button"
+            text="Logout"
+            classes="defaultbutton"
+          />
 
           <InteractiveAvatar session={session} />
         </div>
@@ -42,21 +35,12 @@ export default function Login({ session }: { session: Session }) {
         <div className="flex gap-3">
           <Button
             variant="outlined"
-            aria-label="Login"
-            color="primary"
             startIcon={<BsDiscord />}
             onClick={() => signIn("discord")}
-            sx={{
-              color: "white",
-              paddingTop: "7px",
-              borderColor: "white",
-              "& .MuiButton-startIcon": {
-                marginTop: "-3px",
-              },
-            }}
-          >
-            Login with Discord
-          </Button>
+            ariaLabel="Login with Discord Button"
+            text="Login with Discord"
+            classes="defaultbutton"
+          />
         </div>
       )}
     </>
