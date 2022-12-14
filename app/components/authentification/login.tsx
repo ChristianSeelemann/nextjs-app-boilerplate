@@ -26,7 +26,7 @@ export default function Login({ session }: { session: Session }) {
             onClick={() => signOut()}
             ariaLabel="Logout Button"
             text="Logout"
-            classes="defaultbutton"
+            classes="defaultbutton font-chakrabold"
           />
 
           <InteractiveAvatar session={session} />
@@ -39,7 +39,7 @@ export default function Login({ session }: { session: Session }) {
             onClick={() => signIn("discord")}
             ariaLabel="Login with Discord Button"
             text="Login with Discord"
-            classes="defaultbutton"
+            classes="defaultbutton font-chakrabold"
           />
         </div>
       )}
