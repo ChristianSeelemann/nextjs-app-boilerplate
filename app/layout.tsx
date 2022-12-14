@@ -26,11 +26,13 @@ export default async function RootLayout({
   return (
     <html lang="en" className={colorMode}>
       <head />
-      <body>
+      <body className="bg-light-100 dark:bg-dark-900 text-light-900 dark:text-dark-100 overflow-hidden">
         {/* @ts-expect-error Server Component */}
         <Header />
-        {children}
-        <Footer />
+        <div className="wrapper mt-16 mr-1 px-8 overflow-y-scroll scroll">
+          <main className="pt-4 pb-12">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
