@@ -7,6 +7,7 @@ import { Session } from "../../../types/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
+import Tooltip from "../ui/tooltip";
 
 function getColorMode({ session }: { session: Session }) {
   const colorModeCookie = getCookie("next-colormode");
@@ -81,23 +82,37 @@ export default function ColorModeToggle({ session }: { session: Session }) {
   return (
     <>
       {colorMode && (
-        <IconButton
-          aria-label="Change Colormode"
-          color="inherit"
-          onClick={() => {
-            toggleColorMode({ session });
-            setColorMode(colorMode === "dark" ? "light" : "dark");
-            setTimeout(() => {
-              router.refresh();
-            }, 250);
-          }}
+        <Tooltip
+          title={colorMode === "light" ? "Set Dark Mode" : "Set Light Mode"}
         >
-          {colorMode === "dark" ? (
-            <HiSun className="text-yellow-500" />
-          ) : (
-            <MdDarkMode className="text-blue-200" />
-          )}
-        </IconButton>
+          <IconButton
+            className={
+              colorMode === "dark"
+                ? "bg-dark-800 rounded-md hover:bg-dark-700"
+                : "bg-light-200 rounded-md hover:bg-light-300"
+            }
+            aria-label="Change Colormode"
+            color="inherit"
+            sx={{
+              "&.MuiIconButton-root.Mui-focusVisible": {
+                borderRadius: "8px",
+              },
+            }}
+            onClick={() => {
+              toggleColorMode({ session });
+              setColorMode(colorMode === "dark" ? "light" : "dark");
+              setTimeout(() => {
+                router.refresh();
+              }, 250);
+            }}
+          >
+            {colorMode === "dark" ? (
+              <HiSun className="text-yellow-500" />
+            ) : (
+              <MdDarkMode className="text-light-900" />
+            )}
+          </IconButton>
+        </Tooltip>
       )}
     </>
   );
