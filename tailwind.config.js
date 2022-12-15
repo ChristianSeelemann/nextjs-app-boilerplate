@@ -25,6 +25,8 @@ module.exports = {
         bodyitalic: ["Bai Jamjuree Italic", "sans-serif"],
         bodylight: ["Bai Jamjuree Light", "sans-serif"],
         bodylightitalic: ["Bai Jamjuree Light Italic", "sans-serif"],
+        bodymedium: ["Bai Jamjuree Medium", "sans-serif"],
+        bodymediumitalic: ["Bai Jamjuree Medium Italic", "sans-serif"],
         bodysemibold: ["Bai Jamjuree Semibold", "sans-serif"],
         bodysemibolditalic: ["Bai Jamjuree Semibold Italic", "sans-serif"],
         chakra: ["Chakra Petch", "sans-serif"],
