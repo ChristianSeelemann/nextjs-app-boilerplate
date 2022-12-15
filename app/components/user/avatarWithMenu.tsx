@@ -10,10 +10,14 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { FiLogOut, FiSettings } from "react-icons/fi";
+import { FaUserEdit } from "react-icons/fa";
 import { Session } from "../../../types/auth";
+import Button from "../ui/button";
 import Tooltip from "../ui/tooltip";
+import ColorModeToggle from "../colormode/colorModeToggle";
 
 export default function AvatarWithMenu({ session }: { session: Session }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -80,7 +84,8 @@ export default function AvatarWithMenu({ session }: { session: Session }) {
         onClose={handleClose}
         onClick={handleClose}
         PaperProps={{
-          elevation: 1,
+          className: "menu",
+          elevation: 0,
           sx: {
             overflow: "visible",
             mt: 1.5,
@@ -95,25 +100,40 @@ export default function AvatarWithMenu({ session }: { session: Session }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem>
-          <Avatar /> My account
+        <MenuItem className="menuitemtop">
+          <Avatar
+            alt={session.user ? session.user.name : ""}
+            src={session.user ? session.user.image : ""}
+            variant="rounded"
+          />
+          Watch Profile
         </MenuItem>
         <Divider />
-        <MenuItem>Add another account</MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FiSettings fontSize="small" />
+        <MenuItem className="menuitem">
+          <ListItemIcon className="menuicon" sx={{ mr: -0.5 }}>
+            <FaUserEdit fontSize="large" />
+          </ListItemIcon>
+          Edit Profile
+        </MenuItem>
+        <MenuItem className="menuitem">
+          <ListItemIcon className="menuicon" sx={{ mr: -0.5 }}>
+            <FiSettings fontSize="large" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FiLogOut fontSize="small" />
-          </ListItemIcon>
-          Logout
+        <Divider />
+        <ColorModeToggle session={session} />
+        <MenuItem
+          className="menuitem !bg-transparent"
+          onClick={() => signOut()}
+        >
+          <Button
+            text="Logout"
+            startIcon={<FiLogOut fontSize="large" />}
+            ariaLabel="Logout"
+            variant="contained"
+            classes="defaultbutton font-chakrabold w-full !bg-primary-600 hover:!bg-primary-700 hover:!text-light-50"
+          />
         </MenuItem>
       </Menu>
     </>

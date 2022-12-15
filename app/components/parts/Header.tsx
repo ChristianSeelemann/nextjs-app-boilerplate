@@ -10,7 +10,7 @@ export default async function Header() {
   const userData = await getUser();
 
   return (
-    <header className="flex justify-between items-center px-8 bg-light-100 dark:bg-dark-900 text-light-100 h-16 fixed top-0 left-0 w-screen">
+    <header className="flex justify-between items-center px-8 bg-light-100 dark:bg-dark-900 text-light-900 dark:text-dark-100 h-16 fixed top-0 left-0 w-screen">
       <nav className="font-bodysemibold">
         <ul className="flex gap-4">
           <Link href="/">
@@ -22,7 +22,6 @@ export default async function Header() {
         </ul>
       </nav>
       <div className="flex gap-4">
-        <ColorModeToggle session={userData} />
         <Login session={userData} />
       </div>
     </header>
