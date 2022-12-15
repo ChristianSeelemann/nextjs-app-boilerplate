@@ -9,6 +9,7 @@ interface Props {
   ariaLabel?: string;
   text: string;
   classes?: string;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -18,6 +19,7 @@ export default function Button({
   ariaLabel,
   text,
   classes,
+  disabled,
 }: Props) {
   return (
     <MUIButton
@@ -26,6 +28,7 @@ export default function Button({
       onClick={onClick}
       aria-label={ariaLabel}
       className={classes}
+      disabled={disabled}
       sx={{
         fontFamily: "Chakra Petch Bold",
       }}
