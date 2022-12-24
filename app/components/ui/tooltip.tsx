@@ -16,8 +16,8 @@ export default function Tooltip({
     <MUITooltip {...props} classes={{ popper: className }} />
   ))(() => ({
     [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: "rgb(38 38 38)",
-      color: "#CBD5E1",
+      backgroundColor: "#1A1A1A",
+      color: "#F5F5F5",
       fontSize: 11,
       "&.MuiTooltip-tooltip": {
         padding: 8,

@@ -9,7 +9,13 @@ import { useEffect, useState } from "react";
 import { ButtonGroup, MenuItem } from "@mui/material";
 import Button from "../ui/button";
 
-export default function ColorModeToggle({ session }: { session: Session }) {
+export default function ColorModeToggle({
+  session,
+  handleClose,
+}: {
+  session: Session;
+  handleClose: () => void;
+}) {
   function getColorMode({ session }: { session: Session }) {
     const colorModeCookie = getCookie("next-colormode");
     const defaultColorMode = process.env.NEXT_PUBLIC_DEFAULT_COLORMODE;
@@ -101,6 +107,7 @@ export default function ColorModeToggle({ session }: { session: Session }) {
                   : "defaultbutton font-chakrabold !border-dark-100 hover:!bg-dark-600 hover:!text-dark-50"
               }
               onClick={() => {
+                handleClose();
                 toggleColorMode({ session });
                 setColorMode("light");
                 setTimeout(() => {
@@ -122,6 +129,7 @@ export default function ColorModeToggle({ session }: { session: Session }) {
                   : "defaultbutton font-chakrabold !bg-transparent !text-light-800 !border-light-800 hover:!bg-light-300"
               }
               onClick={() => {
+                handleClose();
                 toggleColorMode({ session });
                 setColorMode("dark");
                 setTimeout(() => {

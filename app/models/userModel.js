@@ -16,6 +16,11 @@ const userSchema = new Schema({
   nickname: String || null,
   colormode: String || null,
   lastOnline: Date || null,
+  bannedReason: String || null,
+  bannedUntil: Number || null,
+  alias: String || null,
+  firstName: String || null,
+  lastName: String || null,
   privacy: {
     showLastOnline: {
       type: null || Boolean,

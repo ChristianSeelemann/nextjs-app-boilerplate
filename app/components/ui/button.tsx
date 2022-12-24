@@ -10,6 +10,7 @@ interface Props {
   text: string;
   classes?: string;
   disabled?: boolean;
+  autoFocus?: boolean;
 }
 
 export default function Button({
@@ -20,6 +21,7 @@ export default function Button({
   text,
   classes,
   disabled,
+  autoFocus,
 }: Props) {
   return (
     <MUIButton
@@ -29,6 +31,7 @@ export default function Button({
       aria-label={ariaLabel}
       className={classes}
       disabled={disabled}
+      autoFocus={autoFocus}
       sx={{
         fontFamily: "Chakra Petch Bold",
       }}

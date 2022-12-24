@@ -81,20 +81,38 @@
 }
 
 @layer components {
+  h1 {
+    @apply text-4xl pb-6 font-bold font-chakrabold;
+  }
+  h2 {
+    @apply text-2xl pb-5 font-bold font-chakrabold;
+  }
   .defaultbutton {
-    @apply dark:border-primary-50 dark:bg-transparent dark:text-primary-50 dark:hover:border-primary-500 dark:hover:text-primary-500 border-primary-600 text-primary-50 hover:border-primary-600 hover:text-primary-600 bg-primary-600;
+    @apply dark:border-primary-50 dark:bg-transparent dark:text-primary-50 dark:hover:border-primary-500 dark:hover:text-primary-500 border-primary-600 text-primary-50 hover:border-primary-600 hover:text-primary-600 hover:bg-transparent bg-primary-600;
   }
   .menuitemtop {
     @apply font-bodymedium hover:bg-light-200 dark:hover:bg-dark-900 focus-visible:bg-light-200 dark:focus-visible:bg-dark-900 py-2;
   }
   .menuitem {
-    @apply font-bodymedium hover:bg-light-200 focus-within:bg-light-200 dark:focus-within:bg-dark-900 dark:hover:bg-dark-900 py-2;
+    @apply font-bodymedium hover:bg-light-300/50 focus-within:bg-light-300/50 dark:focus-within:bg-dark-900/75 dark:hover:bg-dark-900/75 py-2;
+  }
+  .menuitem-active {
+    @apply bg-light-300/25 dark:bg-dark-900/50;
   }
   .menu {
-    @apply shadow-md bg-light-50 text-light-800 dark:bg-dark-800 dark:text-dark-50;
+    @apply shadow-md bg-light-100 text-light-800 dark:bg-dark-800 dark:text-dark-50;
   }
   .menuicon {
     @apply text-light-800 dark:text-dark-50;
+  }
+  .pagetitle {
+    @apply pb-6;
+  }
+  .pagetitle h1 {
+    @apply pb-1;
+  }
+  .pagesection {
+    @apply p-6 rounded-md bg-light-50 dark:bg-dark-800;
   }
 }
 
@@ -102,6 +120,10 @@
 /* Firefox */
 * {
   scrollbar-width: thin;
+  scrollbar-color: #abc8ff2a transparent;
+}
+
+html.dark * {
   scrollbar-color: #abc8ff2a transparent;
 }
 
@@ -115,6 +137,11 @@
 }
 
 *::-webkit-scrollbar-thumb {
+  background-color: #4f545e4d;
+  border-radius: 12px;
+}
+
+html.dark *::-webkit-scrollbar-thumb {
   background-color: #abc8ff2a;
   border-radius: 12px;
 }

@@ -9,7 +9,7 @@ export default async function getUser() {
     // Try to get user data from the token
     const getUser = await fetch(
       process.env.BASE_URL +
-        "/api/user/getSelf?token=" +
+        "/api/user/me?token=" +
         token.value +
         "&api_key=" +
         process.env.API_KEY,
@@ -26,6 +26,21 @@ export default async function getUser() {
       return null;
       // When user data is found, return user data
     } else {
+      // Update lastOnline
+      await fetch(
+        process.env.BASE_URL +
+          "/api/user/me?token=" +
+          token.value +
+          "&api_key=" +
+          process.env.API_KEY,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // Return user data
       return user;
     }
     // When no token cookie found set user to null
