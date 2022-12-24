@@ -7,10 +7,16 @@ export type User = {
   banned?: boolean | null;
   nickname?: string | null;
   colormode: string | null;
-  lastOnline: any;
+  lastOnline: Date | null;
   privacy: {
     showLastOnline: boolean | null;
   };
+  role: string[] | null;
+  bannedReason?: string | null;
+  bannedUntil?: number | null;
+  alias: string | null;
+  firstName: string | null;
+  lastName: string | null;
 } | null;
 
 export type Session = {

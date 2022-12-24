@@ -1,95 +1,16 @@
 export default async function Home() {
   return (
     <>
-      <h1 className="">NEXT 13 BOILERPLATE</h1>
+      <h1>NEXT 13 BOILERPLATE</h1>
 
-      <p className="">This Boilerplate contains:</p>
+      <p>This Boilerplate contains:</p>
 
-      <div className="">
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
-        <p className="">Next.js 13</p>
-
-        <p className="">TailwindCSS</p>
-
-        <p className="">Next-Auth</p>
-
-        <p className="">Next-API</p>
+      <div>
+        <p>Next.js 13</p>
+        <p>TailwindCSS</p>
+        <p>Next-Auth</p>
+        <p>Next-API</p>
+        <p>MaterialUI</p>
       </div>
     </>
   );

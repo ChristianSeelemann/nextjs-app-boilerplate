@@ -14,12 +14,34 @@ import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { FiLogOut, FiSettings } from "react-icons/fi";
 import { FaUserEdit } from "react-icons/fa";
+import { GoDashboard } from "react-icons/go";
 import { Session } from "../../../types/auth";
 import Button from "../ui/button";
 import Tooltip from "../ui/tooltip";
 import ColorModeToggle from "../colormode/colorModeToggle";
+import { usePathname } from "next/navigation";
+import { NextLinkComposed } from "../ui/link";
+
+const items = [
+  {
+    title: "Dashboard",
+    link: "/dashboard",
+    icon: <GoDashboard fontSize="large" />,
+  },
+  {
+    title: "Edit Profile",
+    link: "/user/me/edit",
+    icon: <FaUserEdit fontSize="large" />,
+  },
+  {
+    title: "Settings",
+    link: "/dashboard/settings",
+    icon: <FiSettings fontSize="large" />,
+  },
+];
 
 export default function AvatarWithMenu({ session }: { session: Session }) {
+  const path = usePathname();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -32,7 +54,7 @@ export default function AvatarWithMenu({ session }: { session: Session }) {
   };
 
   let isOnline;
-  if (session) {
+  if (session && session.user?.lastOnline) {
     const lastSeen = Math.floor(
       new Date(session.user?.lastOnline).getTime() / 1000
     );
@@ -82,7 +104,6 @@ export default function AvatarWithMenu({ session }: { session: Session }) {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
         PaperProps={{
           className: "menu",
           elevation: 0,
@@ -100,7 +121,15 @@ export default function AvatarWithMenu({ session }: { session: Session }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem className="menuitemtop">
+        <MenuItem
+          component={NextLinkComposed}
+          to="user/me"
+          onClick={() => handleClose()}
+          key="Watch Profile"
+          className={
+            path === "/user/me" ? "menuitemtop menuitem-active" : "menuitemtop"
+          }
+        >
           <Avatar
             alt={session.user ? session.user.name : ""}
             src={session.user ? session.user.image : ""}
@@ -109,22 +138,27 @@ export default function AvatarWithMenu({ session }: { session: Session }) {
           Watch Profile
         </MenuItem>
         <Divider />
-        <MenuItem className="menuitem">
-          <ListItemIcon className="menuicon" sx={{ mr: -0.5 }}>
-            <FaUserEdit fontSize="large" />
-          </ListItemIcon>
-          Edit Profile
-        </MenuItem>
-        <MenuItem className="menuitem">
-          <ListItemIcon className="menuicon" sx={{ mr: -0.5 }}>
-            <FiSettings fontSize="large" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
+        {items &&
+          items.map((item) => (
+            <MenuItem
+              component={NextLinkComposed}
+              to={item.link}
+              onClick={() => handleClose()}
+              key={item.title}
+              className={
+                path === item.link ? "menuitem menuitem-active" : "menuitem"
+              }
+            >
+              <ListItemIcon className="menuicon" sx={{ mr: -0.5 }}>
+                {item.icon}
+              </ListItemIcon>
+              {item.title}
+            </MenuItem>
+          ))}
         <Divider />
-        <ColorModeToggle session={session} />
+        <ColorModeToggle session={session} handleClose={handleClose} />
         <MenuItem
-          className="menuitem !bg-transparent"
+          className="menuitem !bg-transparent focus-within:!bg-light-200 dark:focus-within:!bg-dark-900"
           onClick={() => signOut()}
         >
           <Button
@@ -133,6 +167,7 @@ export default function AvatarWithMenu({ session }: { session: Session }) {
             ariaLabel="Logout"
             variant="contained"
             classes="defaultbutton font-chakrabold w-full !bg-primary-600 hover:!bg-primary-700 hover:!text-light-50"
+            onClick={() => handleClose()}
           />
         </MenuItem>
       </Menu>

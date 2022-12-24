@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>Next 13 Boilerplate | Sandbox</title>
+      <title>{process.env.NEXT_PUBLIC_SITENAME + " | Sandbox"}</title>
     </>
   );
 }
