@@ -11,8 +11,6 @@
 - Basic Custom User System
 - MaterialUI
 
-## Deploy on Vercel
+## No further developin here at the moment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I fight with several problems with the new app directory. For example crashes in development mode -> the more the project grows, the more frequent the crashes become. This is very annoying and really NO fun.
